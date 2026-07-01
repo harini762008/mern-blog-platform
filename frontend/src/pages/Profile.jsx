@@ -15,7 +15,7 @@ function Profile() {
   const fetchProfile = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:5000/api/users/${id}`
+        `https://mern-blog-platform-jk6t.onrender.com/api/users/${id}`
       );
 
       setUser(res.data.user);

@@ -21,7 +21,7 @@ function Home() {
 
   const fetchBlogs = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/blogs");
+      const res = await axios.get("https://mern-blog-platform-jk6t.onrender.com/api/blogs");
       setBlogs(res.data);
     } catch (err) {
       console.log(err);

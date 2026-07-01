@@ -3,7 +3,7 @@ const token = localStorage.getItem("token");
 const toggleLike = async () => {
   try {
     const res = await axios.put(
-      `http://localhost:5000/api/blogs/${id}/like`,
+      `https://mern-blog-platform-jk6t.onrender.com/api/blogs/${id}/like`,
       {},
       {
         headers: {

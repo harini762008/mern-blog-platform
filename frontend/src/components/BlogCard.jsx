@@ -11,11 +11,11 @@ function BlogCard({ blog }) {
 
   // ❤️ LIKE FUNCTION
   const toggleLike = async (e) => {
-    e.stopPropagation(); // prevent navigation
+    e.stopPropagation();
 
     try {
       const res = await axios.put(
-        `http://localhost:5000/api/blogs/${blog._id}/like`,
+        `https://mern-blog-platform-jk6t.onrender.com/api/blogs/${blog._id}/like`,
         {},
         {
           headers: {
@@ -44,10 +44,8 @@ function BlogCard({ blog }) {
         background: "#fff",
       }}
     >
-      {/* TITLE */}
       <h2>{blog.title}</h2>
 
-      {/* IMAGE */}
       {blog.image && (
         <img
           src={blog.image}
@@ -62,15 +60,12 @@ function BlogCard({ blog }) {
         />
       )}
 
-      {/* CONTENT PREVIEW */}
       <p style={{ marginTop: "10px" }}>
         {blog.content.substring(0, 120)}...
       </p>
 
-      {/* AUTHOR */}
       <small>By {blog.author?.name}</small>
 
-      {/* ACTIONS */}
       <div
         style={{
           marginTop: "10px",
@@ -79,7 +74,6 @@ function BlogCard({ blog }) {
           alignItems: "center",
         }}
       >
-        {/* LIKE BUTTON */}
         <button
           onClick={toggleLike}
           style={{
@@ -94,7 +88,6 @@ function BlogCard({ blog }) {
           ❤️ {likes}
         </button>
 
-        {/* VIEW BUTTON */}
         <button
           onClick={() => navigate(`/blogs/${blog._id}`)}
           style={{
