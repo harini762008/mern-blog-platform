@@ -1,20 +1,32 @@
-const token = localStorage.getItem("token");
+import axios from "axios";
 
-const toggleLike = async () => {
-  try {
-    const res = await axios.put(
-      `https://mern-blog-platform-jk6t.onrender.com/api/blogs/${id}/like`,
-      {},
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+const BlogDetails = () => {
+  const token = localStorage.getItem("token");
 
-    setLikeInfo(res.data);
-  } catch (err) {
-    console.log(err);
-    alert("Like failed");
-  }
+  const toggleLike = async () => {
+    try {
+      const res = await axios.put(
+        `https://mern-blog-platform-jk6t.onrender.com/api/blogs/${id}/like`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      setLikeInfo(res.data);
+    } catch (err) {
+      console.log(err);
+      alert("Like failed");
+    }
+  };
+
+  return (
+    <div>
+      Blog Details Page
+    </div>
+  );
 };
+
+export default BlogDetails;
