@@ -24,7 +24,7 @@ const BlogDetails = () => {
 
   return (
     <div>
-      Blog Details Page
+      Blog Details
     </div>
   );
 };
