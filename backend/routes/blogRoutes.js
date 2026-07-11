@@ -14,18 +14,31 @@ const {
 const protect = require("../middleware/authMiddleware");
 const upload = require("../middleware/upload");
 
+// DEBUG
+console.log("createBlog:", createBlog);
+console.log("getBlogs:", getBlogs);
+console.log("getBlog:", getBlog);
+console.log("updateBlog:", updateBlog);
+console.log("deleteBlog:", deleteBlog);
+console.log("addComment:", addComment);
+console.log("toggleLike:", toggleLike);
+console.log("protect:", protect);
+console.log("upload:", upload);
+
 // GET
 router.get("/", getBlogs);
 router.get("/:id", getBlog);
 
-// CREATE (WITH IMAGE)
+// CREATE
 router.post("/", protect, upload.single("image"), createBlog);
 
-// UPDATE / DELETE
+// UPDATE
 router.put("/:id", protect, updateBlog);
+
+// DELETE
 router.delete("/:id", protect, deleteBlog);
 
-// COMMENTS
+// COMMENT
 router.post("/:id/comment", protect, addComment);
 
 // LIKE
