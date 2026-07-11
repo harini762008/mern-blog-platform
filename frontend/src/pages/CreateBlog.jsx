@@ -17,10 +17,13 @@ function CreateBlog() {
     const formData = new FormData();
     formData.append("title", title);
     formData.append("content", content);
-    formData.append("image", image);
+
+    if (image) {
+      formData.append("image", image);
+    }
 
     try {
-      await axios.post(
+      const res = await axios.post(
         "https://mern-blog-platform-jk6t.onrender.com/api/blogs",
         formData,
         {
@@ -31,10 +34,18 @@ function CreateBlog() {
         }
       );
 
-      alert("Blog created!");
+      console.log("Success:", res.data);
+      alert("✅ Blog created successfully!");
       navigate("/home");
     } catch (err) {
-      alert("Upload failed");
+      console.error("Upload Error:", err);
+
+      if (err.response) {
+        console.log(err.response.data);
+        alert(err.response.data.message || JSON.stringify(err.response.data));
+      } else {
+        alert("Something went wrong. Check the console.");
+      }
     }
   };
 
@@ -44,19 +55,34 @@ function CreateBlog() {
 
       <form onSubmit={handleSubmit}>
         <input
+          type="text"
           placeholder="Title"
+          value={title}
           onChange={(e) => setTitle(e.target.value)}
+          required
         />
+
+        <br />
+        <br />
 
         <textarea
           placeholder="Content"
+          value={content}
           onChange={(e) => setContent(e.target.value)}
+          required
         />
+
+        <br />
+        <br />
 
         <input
           type="file"
+          accept="image/*"
           onChange={(e) => setImage(e.target.files[0])}
         />
+
+        <br />
+        <br />
 
         <button type="submit">Upload</button>
       </form>
