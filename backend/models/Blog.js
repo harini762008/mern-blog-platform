@@ -2,12 +2,25 @@ const mongoose = require("mongoose");
 
 const blogSchema = new mongoose.Schema(
   {
-    title: { type: String, required: true },
-    content: { type: String, required: true },
+    title: {
+      type: String,
+      required: true,
+    },
+
+    content: {
+      type: String,
+      required: true,
+    },
+
+    image: {
+      type: String,
+      default: "",
+    },
 
     author: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
+      required: true,
     },
 
     comments: [
@@ -16,7 +29,9 @@ const blogSchema = new mongoose.Schema(
           type: mongoose.Schema.Types.ObjectId,
           ref: "User",
         },
-        text: String,
+        text: {
+          type: String,
+        },
         createdAt: {
           type: Date,
           default: Date.now,
@@ -31,7 +46,9 @@ const blogSchema = new mongoose.Schema(
       },
     ],
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+  }
 );
 
 module.exports = mongoose.model("Blog", blogSchema);
