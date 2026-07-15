@@ -3,6 +3,9 @@ const Blog = require("../models/Blog");
 // CREATE BLOG
 const createBlog = async (req, res) => {
   try {
+    console.log("BODY:", req.body);
+    console.log("FILE:", req.file);
+
     const blog = await Blog.create({
       title: req.body.title,
       content: req.body.content,
@@ -10,14 +13,12 @@ const createBlog = async (req, res) => {
       author: req.user.id,
     });
 
-    const populatedBlog = await Blog.findById(blog._id).populate(
-      "author",
-      "name email"
-    );
+    const populatedBlog = await Blog.findById(blog._id)
+      .populate("author", "name email");
 
     res.status(201).json(populatedBlog);
   } catch (err) {
-    console.error(err);
+    console.error("CREATE BLOG ERROR:", err);
     res.status(500).json({
       message: err.message,
     });
